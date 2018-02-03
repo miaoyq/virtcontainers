@@ -572,13 +572,13 @@ func (c *Container) stop() error {
 		return nil
 	}
 
-	if state.State != StateRunning {
+	if state.State != StateRunning && state.State != StateReady {
 		return fmt.Errorf("Container not running, impossible to stop")
 	}
 
-	if err := state.validTransition(StateRunning, StateStopped); err != nil {
-		return err
-	}
+	//	if err := state.validTransition(StateRunning, StateStopped); err != nil {
+	//		return err
+	//	}
 
 	defer func() {
 		// If shim is still running something went wrong
